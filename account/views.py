@@ -6,16 +6,16 @@ from .forms import LoginForm
 
 def user_login(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
+        form = LoginForm(request.POST)#создается экземпляр формы с переданными данными
+        if form.is_valid(): #валидация формы
             cd = form.cleaned_data
-            user = authenticate(request, username=cd['username'], password=cd['password'])
+            user = authenticate(request, username=cd['username'], password=cd['password'])#если данные валидны, пользователь аутентифицируется по БД
             if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return HttpResponse('Authenticated successfully')
+                if user.is_active:#проверяется статус пользователя - активна
+                    login(request, user)#пользователь входит в систему
+                    return HttpResponse('Authenticated successfully')#аутентифкация прошла успешно
                 else:
-                    return HttpResponse('Disabled account')
+                    return HttpResponse('Disabled account')#учетная запись не активна
             else:
                 return HttpResponse('Invalid login')
     else:
