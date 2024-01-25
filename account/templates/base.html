@@ -10,7 +10,7 @@
        <span class="logo">Закладки</span>
        {% if request.user.is_authenticated %}
            <ul class="menu">
-               <li {% if section =="dashboard" %}class="selected"{% endif %}>
+               <li {% if section == "dashboard" %}class="selected"{% endif %}>
                    <a href="{% url "dashboard" %}">Моя панель</a>
                </li>
                <li {% if section == "images" %}class="selected"{% endif %}>

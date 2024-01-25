@@ -1,13 +1,15 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
-from .forms import LoginForm
 from django.contrib.auth.decorators import login_required
+from .forms import LoginForm
 
 
 @login_required#данный декоратор проверяет аутентификацию текущего пользователя
 def dashboard(request):
-    return render(request, 'account/dashboard.html', {'section': 'dashboard'})
+    return render(request,
+                  'account/dashboard.html',
+                  {'section': 'dashboard'})
 
 
 def user_login(request):
@@ -15,7 +17,9 @@ def user_login(request):
         form = LoginForm(request.POST)#создается экземпляр формы с переданными данными
         if form.is_valid(): #валидация формы
             cd = form.cleaned_data
-            user = authenticate(request, username=cd['username'], password=cd['password'])#если данные валидны, пользователь аутентифицируется по БД
+            user = authenticate(request,
+                                username=cd['username'],
+                                password=cd['password'])#если данные валидны, пользователь аутентифицируется по БД
             if user is not None:
                 if user.is_active:#проверяется статус пользователя - активна
                     login(request, user)#пользователь входит в систему

@@ -1,11 +1,15 @@
 {% extends "base.html" %}
+
 {% block title %}Авторизоваться{% endblock %}
+
 {% block content %}
    <h1>Авторизоваться</h1>
    <p>Пожалуйста, используйте следующую форму для авторизации:</p>
    <form method="post">
        {{ form.as_p }}
        {% csrf_token %}
-       <p><input type="submit" value="Авторизоваться"></p>
+       <p><input type="submit" value="Log in"></p>
    </form>
 {% endblock %}
+
+

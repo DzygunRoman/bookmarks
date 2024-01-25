@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+LOGIN_REDIRECT_URL = 'dashboard'#перенаправление пользователя по адресу после успешного входа
+LOGIN_URL = 'login'#перенаправляет пользователя для регистрации его входа
+LOGOUT_URL = 'logout'#для регистрации его выхода
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -124,6 +128,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'dashboard'#перенаправление пользователя по адресу после успешного входа
-LOGIN_URL = 'login'#перенаправляет пользователя для регистрации его входа
-LOGOUT_URL = 'logout'#для регистрации его выхода
+
