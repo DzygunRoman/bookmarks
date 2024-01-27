@@ -1,33 +1,32 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
 from .forms import LoginForm
+from django.contrib.auth.decorators import login_required
 
 
-@login_required#данный декоратор проверяет аутентификацию текущего пользователя
+@login_required # проверяет аутентификацию текущего пользователя
 def dashboard(request):
-    return render(request,
-                  'account/dashboard.html',
-                  {'section': 'dashboard'})
+    return render(request,  'account/dashboard.html', {'section': 'dashboard'})
 
 
 def user_login(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)#создается экземпляр формы с переданными данными
-        if form.is_valid(): #валидация формы
+        form = LoginForm(request.POST)
+        if form.is_valid():
             cd = form.cleaned_data
             user = authenticate(request,
                                 username=cd['username'],
-                                password=cd['password'])#если данные валидны, пользователь аутентифицируется по БД
+                                password=cd['password'])
             if user is not None:
-                if user.is_active:#проверяется статус пользователя - активна
-                    login(request, user)#пользователь входит в систему
-                    return HttpResponse('Authenticated successfully')#аутентифкация прошла успешно
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponse('Аутентификация выполнена')
                 else:
-                    return HttpResponse('Disabled account')#учетная запись не активна
+                    return HttpResponse('Аккаунт отключен')
             else:
-                return HttpResponse('Invalid login')
+                return HttpResponse('Неправильный логин')
     else:
         form = LoginForm()
     return render(request, 'account/login.html', {'form': form})
+
