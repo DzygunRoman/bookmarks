@@ -10,3 +10,6 @@ urlpatterns = [
 
 if settings.DEBUG: # используется только в разработке функция вспомогательная функция  static
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+admin.site.site_header = "Панель администрирования" #меняем заголовок админ-панели на свой
+admin.site.index_title = "Профиль" #меняем подзаголовок приложения в админ-панели
