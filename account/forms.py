@@ -34,6 +34,13 @@ class UserEditForm(forms.ModelForm):# Эта форма позволит ред�
         model = User
         fields = ['first_name', 'last_name', 'email']
 
+    def clean_email(self):
+        data = self.cleaned_data['email']
+        qs = User.objects.exclude(id=self.instance.id).filter(email=data)
+        if qs.exists():
+            raise forms.ValidationError('Почта уже используется')
+        return data
+
 
 class ProfileEditForm(forms.ModelForm):# Позволит редактировать пользователям данные конкретно-прикладной модели Profile дату рождения и фото
     class Meta:
