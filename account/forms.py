@@ -22,6 +22,12 @@ class UserRegistrationForm(forms.ModelForm):
             raise forms.ValidationError('Пароли не совпадают')
         return cd['password']
 
+    def clean_email(self):
+        data = self.cleaned_data['email']
+        if User.objects.filter(email=data).exist():
+            raise forms.ValidationError('Такая почта уже используется')
+        return data
+
 
 class UserEditForm(forms.ModelForm):# Эта форма позволит редактировать пользователям свое имя, фамилию и адрес почты
     class Meta:
