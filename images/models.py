@@ -20,6 +20,9 @@ class Image(models.Model):
         ]
         ordering = ['-created']
 
+        verbose_name = "Изображение"  # замена в админ-панели категории блога
+        verbose_name_plural = "Изображения"  # множественное число категории
+
     def __str__(self):
         return self.title
 
