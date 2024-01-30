@@ -130,3 +130,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = 'media/' # используется для раздачи медиафайлов, закаченных пользователями на сайт
 MEDIA_ROOT = BASE_DIR / 'media' # Путь к медафайлам
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+]
