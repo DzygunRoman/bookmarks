@@ -2,10 +2,20 @@
 {% block title %}Панель информации{% endblock %}
 {% block content %}
     <h1>Панель информации</h1>
-    <p>
-        Доро пожаловать в вашу панель информации.
-        Вы можете <a href="{% url 'edit' %}">отредактировать свой профиль</a>
-        или <a href="{% url 'password_change' %}">сменить свой пароль</a>
+    {% with total_images_created=request.user.images_created.count %}
+        <p>
+            Добро пожаловать в вашу панель информации.
+            Вы можете заложить {{ total_images_crated }} изображение{{ total_images_created|pluralize }}.
+        </p>
+    {% endwith %}
+    <p> Перетащите следующую кнопку на панель инструментов закладок,
+        чтобы добавить изображения с других веб-сайтов в закладки
+        <a href="javascript:{% include "book-marklet_launcher.js" %}" class="button">Эта закладка</a>
     </p>
+        <p>
+
+            Вы можете <a href="{% url 'edit' %}">отредактировать свой профиль</a>
+            или <a href="{% url 'password_change' %}">сменить свой пароль</a>
+        </p>
 
 {% endblock %}
